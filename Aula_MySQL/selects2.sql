@@ -1,0 +1,1 @@
+select * from tb_clientes left join tb_carros on (tb_clientes.id_cliente = tb_carros.id_cliente);

@@ -21,12 +21,11 @@
    $resultado = mysqli_query($Link, 'SELECT * FROM tb_info');
 
    // Delete
-   if ($_GET['acao'] = 'excluir') {
-    print_r('excluir');
-   }
-
-   mysqli_query($Link, 'DELETE FROM tb_info WHERE id = '.$_GET['id']);
-
+    // Delete
+    if ($_GET && $_GET['acao'] = 'excluir') {
+        mysqli_query($Link, 'DELETE FROM tb_info WHERE id = '.$_GET['id']);
+        header('location: index.php');
+    }
    
 
    //print_r($resultado);  
@@ -85,7 +84,8 @@
                 echo '<td>'.$dados["servico"].'</td>';
                 echo '<td>'.$dados["login"].'</td>';
                 echo '<td>'.$dados["senha"].'</td>';
-                echo '<td><button><a href="index.php?acao=excluir&id='.$dados['id'].'">Excluir</a></button> <button><a href="">Editar</a></button></td>';
+                echo '<td><button><a href="index.php?acao=excluir&id='.$dados['id'].'">Excluir</a></button> 
+                <button><a href="atualizar.php?id='.$dados['id'].'">Editar</a></button></td>';
             echo '</tr>';
             }
             ?>

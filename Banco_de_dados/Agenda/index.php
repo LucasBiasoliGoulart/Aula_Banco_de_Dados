@@ -65,12 +65,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!--<tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><button class="excluir">Excluir</button> <button class="editar">Editar</button></td>
-                </tr>-->
                 <?php
                     while($dados = mysqli_fetch_assoc($resultado)) {
                     echo '<tr>';

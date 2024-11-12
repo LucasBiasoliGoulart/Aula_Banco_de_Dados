@@ -1,4 +1,16 @@
 <?php
+    require 'conexao.php';
+    
+    mysqli_select_db($link, 'Agenda');
+    mysqli_query($link, "CREATE DATABASE IF NOT EXISTS Agenda");
+
+    // Tabela
+    mysqli_query($link, "CREATE TABLE  IF NOT EXISTS tb_contatos(
+        id int primary key auto_increment,
+        nome varchar(50) not null,
+        telefone varchar(50) not null,
+        email varchar(50) not null
+    )");
 
     if($_POST) {
         // Captura das variaveis do POST
@@ -7,7 +19,19 @@
         $email = $_POST['email'];
  
         // Create
+        mysqli_query($link, "INSERT INTO tb_contatos(nome, telefone, email) values('$nome', '$telefone', '$email')");
+        unset($_POST);
+        header('localhost: index.php');
    }
+
+    // Read
+    $resultado = mysqli_query($link, 'SELECT * FROM tb_contatos');
+
+    // Excluir
+    if ($_GET && $_GET['acao'] = 'excluir') {
+        mysqli_query($link, 'DELETE FROM tb_contatos WHERE id = '.$_GET['id']);
+        header('localhost: index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -21,6 +45,7 @@
         <h1>Agenda de Contatos</h1>
         <a href="./adicionar.php">Adicionar</a>
     </nav>
+    <form action="index.php" method="post">
     <header>
         <h2>Buscar Contato</h2>
         <div class="pesquisa">
@@ -60,6 +85,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 
     <style>
         body{
@@ -75,7 +101,7 @@
             height: 12vh;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             background: black;
             color: white;
         }
@@ -83,6 +109,7 @@
         nav h1{
             font-size: 30px;
             font-weight: 400;
+            margin-left: 20px;
         }
 
         nav a{
@@ -92,6 +119,7 @@
             font-size: 20px;
             background: dodgerblue;
             border-radius: 10px;
+            margin-right: 20px;
         }
 
         header{
@@ -166,6 +194,11 @@
 
         .excluir{
             background: red;
+        }
+
+        a{
+            text-decoration: none;
+            color: white;
         }
 
         .editar{

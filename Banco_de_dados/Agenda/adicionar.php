@@ -1,3 +1,8 @@
+<?php
+
+require 'index.php';
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,7 +43,7 @@
             height: 12vh;
             display: flex;
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
             background: black;
             color: white;
         }
@@ -46,6 +51,7 @@
         nav h1{
             font-size: 30px;
             font-weight: 400;
+            margin-left: 20px;
         }
 
         nav a{
@@ -55,6 +61,7 @@
             font-size: 20px;
             background: dodgerblue;
             border-radius: 10px;
+            margin-right: 20px;
         }
 
         header{

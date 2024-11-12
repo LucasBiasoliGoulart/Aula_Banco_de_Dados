@@ -10,7 +10,7 @@
         <h1>Agenda de Contatos</h1>
         <a href="./index.php">Voltar</a>
     </nav>
-    <header>
+    <div class="conta">
         <form action="index.php" method="post">
         <h2>Adicionar Novo Contato</h2>
             <div class="inputs">
@@ -23,7 +23,7 @@
             </div>
             <button type="submit">Adicionar</button>
         </form>
-    </header>
+    </div>
     <style>
          body{
             margin: 0;
@@ -59,7 +59,7 @@
             margin-right: 20px;
         }
 
-        header{
+        .conta{
             width: 100%;
             height: 88vh;
             display: flex;

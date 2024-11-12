@@ -11,7 +11,7 @@
         <a href="./index.php">Voltar</a>
     </nav>
     <header>
-        <form action="adicionar.php" method="post">
+        <form action="index.php" method="post">
         <h2>Adicionar Novo Contato</h2>
             <div class="inputs">
                 <label for="nome">Nome</label>

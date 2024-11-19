@@ -8,11 +8,11 @@
 <body>
     <nav>
         <h1>Agenda de Contatos</h1>
-        <a href="./adicionar.php">Adicionar</a>
+        <a href="./index.php">Voltar</a>
     </nav>
     <header>
         <div class="mensagem">
-            <h2>Deletado com Sucesso</h2>
+            <h2>Conta deletada com Sucesso</h2>
             <a href="./index.php">Voltar para lista de contatos</a>
         </div>
     </header>
@@ -67,6 +67,10 @@
             background-color: white;
         }
 
+        .mensagem a:hover{
+            color: dodgerblue;
+        }
+
         h2{
             font-size: 30px;
             font-weight: 400;
@@ -76,10 +80,6 @@
             text-decoration: none;
             color: black;
             font-size: 17px;
-        }
-        
-        a:hover{
-            color: dodgerblue;
         }
     </style>
 </body>

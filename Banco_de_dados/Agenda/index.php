@@ -30,7 +30,7 @@
     // Excluir
     if ($_GET && $_GET['acao'] = 'excluir') {
         mysqli_query($link, 'DELETE FROM tb_contatos WHERE id = '.$_GET['id']);
-        header('location: index.php');
+        header('location: deletado.php');
     }
 ?>
 <!DOCTYPE html>
@@ -169,6 +169,7 @@
 
         table{
            width: 90%;
+           background: #757575;
         }
 
         tr, td{
@@ -176,11 +177,10 @@
             height: 30px;
             padding: 5px 10px;
             background-color: white;
-            border: 1px solid black;
         }
 
         button{
-            padding: 10px 30px;
+            padding: 10px 20px;
             border: none;
             font-size: 17px; 
             border-radius: 5px;

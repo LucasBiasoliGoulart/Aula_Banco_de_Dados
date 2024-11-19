@@ -15,11 +15,16 @@
         }
     }
 
+    $id = isset($_GET['id']) ? $_GET['id'] : '';
+    $nome = isset($_POST['nome']) ? $_POST['nome'] : '';
+    $telefone = isset($_POST['telefone']) ? $_POST['telefone'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+
     if ($_POST) {
-        $id = $dados['id'];
-        $nome = $dados['nome'];
-        $telefone = $dados['telefone'];
-        $email = $dados['email'];
+        $id = $_POST['id'];
+        $nome = $_POST['nome'];
+        $telefone = $_POST['telefone'];
+        $email = $_POST['email'];
         mysqli_query($link, "UPDATE tb_contatos SET NOME = '$nome', TELEFONE = '$telefone', EMAIL = '$email' WHERE ID =".$id);
         header('location: index.php');
     }
@@ -37,17 +42,17 @@
         <a href="./index.php">Voltar</a>
     </nav>
     <div class="conta">
-        <form action="index.php" method="post">
+        <form action="update.php" method="post">
         <h2>Editar Contato</h2>
             <div class="inputs">
                 <label for="id">Id</label>
-                <input type="text" name="id" placeholder="Digite o ID" value="<?php echo $id; ?>">
+                <input type="text" name="id" value="<?php echo $id;?>">
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" placeholder="Digite o nome do contato" value="<?php echo $nome; ?>">
+                <input type="text" name="nome" placeholder="Digite o nome do contato" value="<?php echo $nome;?>">
                 <label for="telefone">Telefone</label>
-                <input type="tel" name="telefone" placeholder="Digite o número de telefone" value="<?php echo $telefone; ?>">
+                <input type="text" name="telefone" placeholder="Digite o número de telefone" value="<?php echo $telefone;?>">
                 <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Digite o email" value="<?php echo $email; ?>">
+                <input type="email" name="email" placeholder="Digite o email" value="<?php echo $email;?>">
             </div>
             <button type="submit">Enviar</button>
         </form>

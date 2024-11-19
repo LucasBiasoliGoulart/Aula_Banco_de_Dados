@@ -2,14 +2,16 @@
     require 'conexao.php';
 
     // Update
-    if ($_GET && $_GET['acao'] = "update") {
+    if ($_GET && isset($_GET['acao']) && $_GET['acao'] = "update") {
         $id = $_GET['id'];
         $resultado = mysqli_query($link, 'SELECT * FROM tb_contatos WHERE ID ='.$id);
-        while ($dados = mysqli_fetch_assoc($resultado)) {
-            $id = $dados['id'];
-            $nome = $dados['nome'];
-            $telefone = $dados['telefone'];
-            $email = $dados['email'];
+        if ($resultado) {
+            while ($dados = mysqli_fetch_assoc($resultado)) {
+                $id = $dados['id'];
+                $nome = $dados['nome'];
+                $telefone = $dados['telefone'];
+                $email = $dados['email'];
+            }
         }
     }
 
@@ -19,7 +21,7 @@
         $telefone = $dados['telefone'];
         $email = $dados['email'];
         mysqli_query($link, "UPDATE tb_contatos SET NOME = '$nome', TELEFONE = '$telefone', EMAIL = '$email' WHERE ID =".$id);
-        header('localhost: index.php');
+        header('location: index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -35,9 +37,11 @@
         <a href="./index.php">Voltar</a>
     </nav>
     <div class="conta">
-        <form action="update.php" method="post">
+        <form action="index.php" method="post">
         <h2>Editar Contato</h2>
             <div class="inputs">
+                <label for="id">Id</label>
+                <input type="text" name="id" placeholder="Digite o ID" value="<?php echo $id; ?>">
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" placeholder="Digite o nome do contato" value="<?php echo $nome; ?>">
                 <label for="telefone">Telefone</label>

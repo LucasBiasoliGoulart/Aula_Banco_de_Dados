@@ -21,7 +21,7 @@
         // Create
         mysqli_query($link, "INSERT INTO tb_contatos(nome, telefone, email) values('$nome', '$telefone', '$email')");
         unset($_POST);
-        header('localhost: index.php');
+        header('location: index.php');
    }
 
     // Read
@@ -30,7 +30,7 @@
     // Excluir
     if ($_GET && $_GET['acao'] = 'excluir') {
         mysqli_query($link, 'DELETE FROM tb_contatos WHERE id = '.$_GET['id']);
-        header('localhost: index.php');
+        header('location: index.php');
     }
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
         <h2>Buscar Contato</h2>
         <div class="pesquisa">
             <input type="text" placeholder="Digite o nome do contato">
-            <button>Buscar</button>
+            <button type="submit">Buscar</button>
         </div>
     </header>
     <div class="tabela">
@@ -58,6 +58,7 @@
         <table>
             <thead>
                 <tr>
+                    <td>ID</td>
                     <td>Nome</td>
                     <td>Telefone</td>
                     <td>Email</td>
@@ -68,11 +69,12 @@
                 <?php
                     while($dados = mysqli_fetch_assoc($resultado)) {
                     echo '<tr>';
+                        echo '<td>'.$dados["id"].'</td>';
                         echo '<td>'.$dados["nome"].'</td>';
                         echo '<td>'.$dados["telefone"].'</td>';
                         echo '<td>'.$dados["email"].'</td>';
                         echo '<td><button class="excluir"><a href="index.php?acao=excluir&id='.$dados['id'].'">Excluir</a></button> 
-                        <button class="editar"><a href="atualizar.php?id='.$dados['id'].'">Editar</a></button></td>';
+                        <button class="editar"><a href="update.php?id='.$dados['id'].'">Editar</a></button></td>';
                     echo '</tr>';
                     }
                 ?>
@@ -172,7 +174,7 @@
         tr, td{
             width: 10%;
             height: 30px;
-            padding: 5px;
+            padding: 5px 10px;
             background-color: white;
             border: 1px solid black;
         }

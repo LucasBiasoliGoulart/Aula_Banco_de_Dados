@@ -56,7 +56,44 @@ BEGIN
 END; //
 DELIMITER ;
 
-call AumentoSalario(1, 100);
+call AumentoSalario(1, 10);
 
+set SQL_SAFE_UPDATES = 0;
 
+call AumentoSalario(1, 10.5);
 
+set SQL_SAFE_UPDATES = 1;
+
+-- Produtos
+CREATE TABLE Produtos (
+ProdutoID INT PRIMARY KEY,
+Nome VARCHAR(100),
+Estoque int
+);
+
+CREATE TABLE Vendas (
+VendaID INT PRIMARY KEY,
+ProdutoID INT,
+Quantidade INT,
+foreign key (ProdutoID) references Produtos(ProdutoID)
+);
+
+insert into Produtos (ProdutoID, Nome, Estoque) values (1, 'Produto A', 100);
+insert into Produtos (ProdutoID, Nome, Estoque) values (2, 'Produto B', 200);
+
+insert into Vendas (VendaID, ProdutID, Quantidade) values (1, 1, 10);
+select * from vendas;
+select * from produtos;
+truncate vendas;
+
+DELIMITER $$
+CREATE TRIGGER AtualizaEstoque
+AFTER INSERT ON vendas
+FOR EACH ROW
+begin
+   update Produtos
+   SET Estoque = Estoque - new.Quantidade
+   where ProdutoID = NEW.ProdutoID;
+   
+end $$
+DELIMITER ;

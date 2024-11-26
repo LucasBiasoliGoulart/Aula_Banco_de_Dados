@@ -1,4 +1,4 @@
--- Funções
+-- Aula 5: Funções
 CREATE DATABASE db_dados;
 
 CREATE table Pedidos (

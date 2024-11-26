@@ -38,5 +38,25 @@ Nome varchar(100),
 Salario decimal(10, 2)
 );
 
-insert into Funcionario (FuncionarioID, Nome, Salario)
+insert into Funcionario (FuncionarioID, Nome, Salario) values 
+(1, 'João', '150'),
+(2, 'Maria', '200');
+
+select * from funcionario;
+
+DELIMITER //
+CREATE PROCEDURE AumentoSalario(
+   in FuncionarioID INT,
+   in PercentualAumento decimal(5, 2)
+)
+BEGIN
+   update Funcionario
+   set Salario = Salario + (Salario * PercentualAumento / 100)
+   where FuncionarioID = FuncionarioID;
+END; //
+DELIMITER ;
+
+call AumentoSalario(1, 100);
+
+
 

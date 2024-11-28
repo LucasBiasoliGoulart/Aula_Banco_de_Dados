@@ -32,6 +32,10 @@ END;
 //
 DELIMITER ;
 
-insert into pedido (pedidoID, produto, quantidade, precoUnitario) values (1, 'Caneta', '2', '2,50');
+insert into pedido (pedidoID, produto, quantidade, precoUnitario) values 
+(1, 'Caneta', '2', '2,50'),
+(2, 'Camiseta', '1', '3,50'),
+(3, 'Tênis', '1', '4,00'),
+(4, 'Short', '3', '6,50');
 
 select * from pedido;

@@ -140,8 +140,14 @@
 
         .pesquisa input{
             width: 80%;
-            height: 35px;
+            height: 100%;
             padding: 0px 10px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .pesquisa input::placeholder{
+            color: black;
         }
 
         .pesquisa button{

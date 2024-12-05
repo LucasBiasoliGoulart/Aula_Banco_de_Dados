@@ -45,14 +45,14 @@
         <form action="update.php" method="post">
         <h2>Editar Contato</h2>
             <div class="inputs">
-                <label for="id">Id</label>
+                <label for="id">ID</label>
                 <input type="text" name="id" value="<?php echo $id;?>">
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" placeholder="Digite o nome do contato" value="<?php echo $nome;?>">
+                <input type="text" name="nome" value="<?php echo $nome;?>">
                 <label for="telefone">Telefone</label>
-                <input type="text" name="telefone" placeholder="Digite o número de telefone" value="<?php echo $telefone;?>">
+                <input type="text" name="telefone" value="<?php echo $telefone;?>">
                 <label for="email">Email</label>
-                <input type="email" name="email" placeholder="Digite o email" value="<?php echo $email;?>">
+                <input type="email" name="email" value="<?php echo $email;?>">
             </div>
             <button type="submit">Enviar</button>
         </form>
@@ -118,7 +118,7 @@
         }
 
         button{
-            width: 50%;
+            width: 100%;
             height: 50px;
             border: none;
             color: white;
@@ -138,9 +138,17 @@
 
         .inputs input{
             width: 95%;
-            height: 40px;
+            height: 43px;
             padding: 0 10px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            outline: none;
+            border: 1px solid gray;
+            font-size: 15px;
+            border-radius: 5px;
+        }
+
+        .inputs input::placeholder{
+            color: black;
         }
     </style>
 </body>

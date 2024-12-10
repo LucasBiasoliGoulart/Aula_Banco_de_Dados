@@ -8,12 +8,16 @@
             $link = new PDO($dsn, $user, $pass);
 
             $pergunta = "select * from tb_usuario where";
-            $pergunta.= " usuario = '{$_POST['usuario']}'";
-            $pergunta.= " and senha = '{$_POST['senha']}'";
+            $pergunta.= " usuario = :usuario";
+            $pergunta.= " and senha = :senha";
 
-            $resposta = $link->query($pergunta);
+            $resposta = $link->prepare($pergunta);
+            $resposta->bindValue(':usuario', $_POST['usuario']);
+            $resposta->bindValue(':senha', $_POST['senha']);
+
+            $resposta->execute();
+
             $usuario = $resposta->fetch();
-            print_r($usuario);
 
         }catch(PDOException $e) {
             echo 'Erro'.$e->getCode().'Mensagem'.$e->getMessage();
@@ -78,7 +82,10 @@
         button{
             width: 70%;
             height: 40px;
+            border: none;
+            background: dodgerblue;
             margin-bottom: 30px;
+            cursor: pointer;
         }
     </style>
 </body>

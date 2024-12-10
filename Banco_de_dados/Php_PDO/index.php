@@ -1,5 +1,4 @@
 <?php 
-
    if (!empty($_POST['usuario']) && !empty($_POST['senha'])) {
         $dsn = 'mysql:host=localhost;dbname=banco_teste';
         $user = 'root';
@@ -32,10 +31,17 @@
 <body>
     <form action="index.php" method="post">
         <h1>Login</h1>
-        <input type="text" name="usuario" placeholder="Usuario"> <br>
+        <input type="text" name="usuario" placeholder="Usuario"><br>
         <input type="password" name="senha" placeholder="Senha"><br>
         <button type="submit">Entrar</button>
     </form>
+    <?php 
+        if(empty($usuario)) {
+            echo '<h2>Não Logada</h2>';
+        }else {
+            echo '<h2>Logado</h2>';
+        }
+    ?>
     <style>
         body{
             width: 100%;
@@ -60,7 +66,7 @@
             flex-direction: column;
         }
 
-        h1{
+        h1, h2{
             font-weight: 400;
         }
 

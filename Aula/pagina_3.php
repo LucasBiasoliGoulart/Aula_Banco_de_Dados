@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Aula 1 - Requisições</title>
+    <title>Requisições</title>
 </head>
 <body>
     <nav class="menu">
-        <h3>Rede de Notícias</h3>
+        <h3>Requisições sincronas e assincronas</h3>
     </nav>
     <div class="botoes">
-        <a href="#">Notícia 1</a>
-        <a href="./pagina_2.html">Notícia 2</a>
-        <a href="./pagina_3.html">Notícia 3</a>
+        <a href="./pagina_1.html">Página 1</a>
+        <a href="./pagina_2.html">Página 2</a>
+        <a href="#">Página 3</a>
     </div>
     <div class="principal">
         <div class="card">
             <div class="titulo">
-                <h2>Notícia 1</h2>
+                <h2>Notícia 3</h2>
             </div>
             <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.</p>
+            <p>Lorem ipsum is a placeholder text commonly used in publishing and graphic design to demonstrate the visual form of a document or a typeface without relying on meaningful content. It is essentially nonsense text that still gives an idea of what real words will look like in the final product. It may be used as a placeholder before final copy is available.</p>
         </div>
     </div>
 </body>

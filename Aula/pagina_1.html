@@ -11,13 +11,21 @@
         <h3>Requisições sincronas e assincronas</h3>
     </nav>
     <div class="botoes">
-        <a href="#">Página 1</a>
-        <a href="./pagina_2.html">Página 2</a>
-        <a href="./pagina_3.html">Página 3</a>
+        <a href="#" onclick="requisicao('pagina_conteudo_1.html')">Página 1</a>
+        <a href="#" onclick="requisicao('pagina_conteudo_2.html')">Página 2</a>
+        <a href="#" onclick="requisicao('pagina_conteudo_3.html')">Página 3</a>
     </div>
     <div class="principal">
         
     </div>
-    <script></script>
+    <script>
+        function requisicao(url) {
+            let ajax = new XMLHttpRequest();
+            console.log(ajax.readyState);
+            ajax.open('GET', url);
+            ajax.send();
+            console.log(ajax);
+        }
+    </script>
 </body>
 </html>

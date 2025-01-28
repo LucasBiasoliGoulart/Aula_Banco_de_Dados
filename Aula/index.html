@@ -24,7 +24,10 @@
             console.log(ajax.readyState);
             ajax.open('GET', url);
             ajax.send();
-            console.log(ajax);
+            console.log(ajax.readyState);
+            ajax.onreadystatechange = function() {
+                console.log(ajax.readyState);
+            }
         }
     </script>
 </body>

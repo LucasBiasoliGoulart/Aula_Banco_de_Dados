@@ -16,15 +16,15 @@
         <a href="#" onclick="requisicao('pagina_conteudo_3.html')">Página 3</a>
     </div>
     <div class="principal">
-        <div id="divloading"></div>
         <div id="conteudo"></div>
     </div>
     <script>
         function requisicao(url) {
+            document.getElementById('conteudo').innerHTML = ''
             let imglaoding = document.createElement('img');
             imglaoding.src = 'loading.gif';
             imglaoding.id = 'loading';
-            document.getElementById('divloading').appendChild(imglaoding);
+            document.getElementById('conteudo').appendChild(imglaoding);
 
             let ajax = new XMLHttpRequest();
             ajax.open('GET', url);
@@ -37,7 +37,6 @@
                     if (ajax.status == 404) {
                         document.getElementById('conteudo').innerHTML = '<h1>Recursos não encontrados, Código de erro 404</h1>';
                     }
-                    document.getElementById('loading').remove();
                 }
             }
             console.log(ajax);

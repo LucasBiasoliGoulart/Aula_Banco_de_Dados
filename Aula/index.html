@@ -11,23 +11,36 @@
         <h3>Requisições sincronas e assincronas</h3>
     </nav>
     <div class="botoes">
-        <a href="#" onclick="requisicao('pagina_conteudo_1.html')">Página 1</a>
+        <a href="#" onclick="requisicao('pagina_conteudo_1.php')">Página 1</a>
         <a href="#" onclick="requisicao('pagina_conteudo_2.html')">Página 2</a>
         <a href="#" onclick="requisicao('pagina_conteudo_3.html')">Página 3</a>
     </div>
     <div class="principal">
-        
+        <div id="divloading"></div>
+        <div id="conteudo"></div>
     </div>
     <script>
         function requisicao(url) {
+            let imglaoding = document.createElement('img');
+            imglaoding.src = 'loading.gif';
+            imglaoding.id = 'loading';
+            document.getElementById('divloading').appendChild(imglaoding);
+
             let ajax = new XMLHttpRequest();
-            console.log(ajax.readyState);
             ajax.open('GET', url);
             ajax.send();
-            console.log(ajax.readyState);
-            ajax.onreadystatechange = function() {
-                console.log(ajax.readyState);
+            ajax.onreadystatechange = () =>{
+                if (ajax.readyState == 4){
+                    if (ajax.status == 200) {
+                        document.getElementById('conteudo').innerHTML = ajax.responseText;
+                    }
+                    if (ajax.status == 404) {
+                        document.getElementById('conteudo').innerHTML = '<h1>Recursos não encontrados, Código de erro 404</h1>';
+                    }
+                    document.getElementById('loading').remove();
+                }
             }
+            console.log(ajax);
         }
     </script>
 </body>

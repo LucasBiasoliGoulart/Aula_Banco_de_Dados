@@ -11,7 +11,7 @@
     <nav class="menu">
         <h3>Catálogo de Filmes</h3>
     </nav>
-    <div class="listar">
+    <div class="listar" id="lista">
         <button onclick="getFilmes()">Listar Filmes</button>
     </div>
     <div id="conteudo"></div>
@@ -23,7 +23,6 @@
                 if (xmlHttp.readyState == 4) {
                     if (xmlHttp.status == 200) {
                         let XMLFilmes = xmlHttp.responseText;
-                        //console.log(XMLFilmes);
                         let parser = new DOMParser();
 
                         let domFilmes = parser.parseFromString(XMLFilmes, 'text/xml');
@@ -31,6 +30,38 @@
 
                         let jsonFilmes = xmlToJson(domFilmes);
                         console.log(jsonFilmes);
+
+                        for (let i in jsonFilmes['filmes']['filme']){
+                            let item = jsonFilmes['filmes']['filme'][i]
+                            console.log(item);
+
+                            let divCard = document.createElement('div')
+                            divCard.className = 'card'
+
+                            let divMove = document.createElement('div')
+                            divMove.className = 'move'
+
+                            let p1 = document.createElement('p')
+                            p1.innerHTML = '<p><strong>Titulo:</strong> ' + item['titulo']['#text'] + '</p>'
+                            let p2 = document.createElement('p')
+                            p2.innerHTML = '<p><strong>Resumo:</strong> ' + item['resumo']['#text'] + '</p>'
+                            let p3 = document.createElement('p')
+                            p3.innerHTML = '<p><strong>Gênero:</strong> ' + item['genero']['#text'] + '</p>'
+                            let p4 = document.createElement('p')
+                            p4.innerHTML = '<p><strong>Elenco:</strong> ' + item['elenco']['#text'] + '</p>'
+                            let p5 = document.createElement('p')
+                            p5.innerHTML = '<p><strong>Data de lançamento:</strong> ' + item['dataLancamento']['#text'] + '</p>'
+
+                            // Criar a herarquia
+                            divCard.appendChild(divMove)
+                            divMove.appendChild(p1)
+                            divMove.appendChild(p2)
+                            divMove.appendChild(p3)
+                            divMove.appendChild(p4)
+                            divMove.appendChild(p5)
+
+                            document.getElementById('lista').appendChild(divCard)
+                        }
                     }
                     if (xmlHttp.status == 404) {
                         document.getElementById('conteudo').innerHTML = '<h1>Recurso não encontrado, Código de erro 404</h1>';

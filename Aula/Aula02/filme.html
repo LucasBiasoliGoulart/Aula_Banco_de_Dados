@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="./xmltojson.js"></script>
+    <title>Aula de XML</title>
+</head>
+<body>
+    <nav class="menu">
+        <h3>Catálogo de Filmes</h3>
+    </nav>
+    <div class="listar">
+        <button onclick="getFilmes()">Listar Filmes</button>
+    </div>
+    <div id="conteudo"></div>
+    <script>
+        function getFilmes() {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("Get", 'http://localhost/Banco_de_dados/Aula/Aula02/filmes.xml');
+            xmlHttp.onreadystatechange = () => {
+                if (xmlHttp.readyState == 4) {
+                    if (xmlHttp.status == 200) {
+                        let XMLFilmes = xmlHttp.responseText;
+                        //console.log(XMLFilmes);
+                        let parser = new DOMParser();
+
+                        let domFilmes = parser.parseFromString(XMLFilmes, 'text/xml');
+                        console.log(domFilmes);
+
+                        let jsonFilmes = xmlToJson(domFilmes);
+                        console.log(jsonFilmes);
+                    }
+                    if (xmlHttp.status == 404) {
+                        document.getElementById('conteudo').innerHTML = '<h1>Recurso não encontrado, Código de erro 404</h1>';
+                    }
+                }
+            }
+            //console.log(xmlHttp);
+            xmlHttp.send();
+        }
+    </script>
+</body>
+</html>

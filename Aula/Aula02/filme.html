@@ -16,60 +16,77 @@
     </div>
     <div id="conteudo"></div>
     <script>
+        let controle = false
         function getFilmes() {
-            let xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("Get", 'http://localhost/Banco_de_dados/Aula/Aula02/filmes.xml');
-            xmlHttp.onreadystatechange = () => {
-                if (xmlHttp.readyState == 4) {
-                    if (xmlHttp.status == 200) {
-                        let XMLFilmes = xmlHttp.responseText;
-                        let parser = new DOMParser();
+            if (!controle) {
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("Get", 'http://localhost/Banco_de_dados/Aula/Aula02/filmes.xml');
+                xmlHttp.onreadystatechange = () => {
+                    if (xmlHttp.readyState == 4) {
+                        if (xmlHttp.status == 200) {
+                            let XMLFilmes = xmlHttp.responseText;
+                            let parser = new DOMParser();
+                            let domFilmes = parser.parseFromString(XMLFilmes, 'text/xml');
+                            //console.log(domFilmes);
 
-                        let domFilmes = parser.parseFromString(XMLFilmes, 'text/xml');
-                        console.log(domFilmes);
+                            let jsonFilmes = xmlToJson(domFilmes);
+                            //console.log(jsonFilmes);
 
-                        let jsonFilmes = xmlToJson(domFilmes);
-                        console.log(jsonFilmes);
+                            for (let i in jsonFilmes['filmes']['filme']){
+                                let item = jsonFilmes['filmes']['filme'][i]
+                                //console.log(item);
 
-                        for (let i in jsonFilmes['filmes']['filme']){
-                            let item = jsonFilmes['filmes']['filme'][i]
-                            console.log(item);
+                                let divCard = document.createElement('div')
+                                divCard.className = 'card'
 
-                            let divCard = document.createElement('div')
-                            divCard.className = 'card'
+                                let divMove = document.createElement('div')
+                                divMove.className = 'move'
 
-                            let divMove = document.createElement('div')
-                            divMove.className = 'move'
+                                let p1 = document.createElement('p')
+                                p1.innerHTML = '<p><strong>Titulo:</strong> ' + item['titulo']['#text'] + '</p>'
 
-                            let p1 = document.createElement('p')
-                            p1.innerHTML = '<p><strong>Titulo:</strong> ' + item['titulo']['#text'] + '</p>'
-                            let p2 = document.createElement('p')
-                            p2.innerHTML = '<p><strong>Resumo:</strong> ' + item['resumo']['#text'] + '</p>'
-                            let p3 = document.createElement('p')
-                            p3.innerHTML = '<p><strong>Gênero:</strong> ' + item['genero']['#text'] + '</p>'
-                            let p4 = document.createElement('p')
-                            p4.innerHTML = '<p><strong>Elenco:</strong> ' + item['elenco']['#text'] + '</p>'
-                            let p5 = document.createElement('p')
-                            p5.innerHTML = '<p><strong>Data de lançamento:</strong> ' + item['dataLancamento']['#text'] + '</p>'
+                                let p2 = document.createElement('p')
+                                p2.innerHTML = '<p><strong>Resumo:</strong> ' + item['resumo']['#text'] + '</p>'
 
-                            // Criar a herarquia
-                            divCard.appendChild(divMove)
-                            divMove.appendChild(p1)
-                            divMove.appendChild(p2)
-                            divMove.appendChild(p3)
-                            divMove.appendChild(p4)
-                            divMove.appendChild(p5)
+                                // Gênero
+                                let genero = ''
+                                for(let g in item.genero) {
+                                    if(genero) genero += ', '
+                                    genero += item.genero[g]['#text']
+                                }
+                                let p3 = document.createElement('p')
+                                p3.innerHTML = '<p><strong>Gênero:</strong> '+ genero +'</p>'
 
-                            document.getElementById('lista').appendChild(divCard)
+                                // Elenco
+                                let elenco = ''
+                                for(let e in item.elenco.ator) {
+                                    if(elenco) elenco += ', '
+                                    elenco += item.elenco.ator[e]['#text']
+                                }
+                                let p4 = document.createElement('p')
+                                p4.innerHTML = '<p><strong>Elenco:</strong> ' + elenco + '</p>'
+
+                                let p5 = document.createElement('p')
+                                p5.innerHTML = '<p><strong>Data de lançamento:</strong> ' + item.dataLancamento['#text'] + '(' + item.dataLancamento['@attributes']['pais']+')</p>'
+
+                                // Criar a herarquia
+                                divCard.appendChild(divMove)
+                                divMove.appendChild(p1)
+                                divMove.appendChild(p2)
+                                divMove.appendChild(p3)
+                                divMove.appendChild(p4)
+                                divMove.appendChild(p5)
+
+                                document.getElementById('lista').appendChild(divCard)
+                            }
+                        }
+                        if (xmlHttp.status == 404) {
+                            document.getElementById('conteudo').innerHTML = '<h1>Recurso não encontrado, Código de erro 404</h1>';
                         }
                     }
-                    if (xmlHttp.status == 404) {
-                        document.getElementById('conteudo').innerHTML = '<h1>Recurso não encontrado, Código de erro 404</h1>';
-                    }
                 }
+                xmlHttp.send();
             }
-            //console.log(xmlHttp);
-            xmlHttp.send();
         }
     </script>
 </body>

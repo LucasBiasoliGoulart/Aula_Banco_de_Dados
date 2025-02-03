@@ -53,9 +53,9 @@
 
                                 // Gênero
                                 let genero = ''
-                                for(let g in item.genero) {
+                                for(let g in item.generos) {
                                     if(genero) genero += ', '
-                                    genero += item.genero[g].genero
+                                    genero += item.generos[g].genero
                                 }
                                 let p3 = document.createElement('p')
                                 p3.innerHTML = '<p><strong>Gênero:</strong> '+ genero +'</p>'
@@ -64,13 +64,13 @@
                                 let elenco = ''
                                 for(let e in item.elenco) {
                                     if(elenco) elenco += ', '
-                                    elenco += item.elenco.ator[e].ator
+                                    elenco += item.elenco[e].ator
                                 }
                                 let p4 = document.createElement('p')
                                 p4.innerHTML = '<p><strong>Elenco:</strong> ' + elenco + '</p>'
 
                                 let p5 = document.createElement('p')
-                                p5.innerHTML = '<p><strong>Data de lançamento:</strong> ' + item.dataLancamento['#text'] + '(' + item.dataLancamento['@attributes']['pais']+')</p>'
+                                p5.innerHTML = '<p><strong>Data de lançamento:</strong> ' + item.dataLancamento.data + '(' + item.dataLancamento.pais+')</p>'
 
                                 // Criar a herarquia
                                 divRow.appendChild(divCol)

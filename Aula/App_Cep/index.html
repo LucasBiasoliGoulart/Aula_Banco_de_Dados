@@ -19,19 +19,19 @@
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-primary">Endereço</label>
-            <input type="text" class="form-control bg-light" placeholder="Digite seu Endereço" readonly>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu Endereço" readonly id="endereco">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-primary">Bairro</label>
-            <input type="text" class="form-control bg-light" placeholder="Digite seu Bairro" readonly>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu Bairro" readonly id="bairro">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-primary">Cidade</label>
-            <input type="text" class="form-control bg-light" placeholder="Digite sua Cidade" readonly>
+            <input type="text" class="form-control bg-light" placeholder="Digite sua Cidade" readonly id="cidade">
         </div>
         <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label text-primary">UF</label>
-            <input type="text" class="form-control bg-light" placeholder="Digite seu UF" readonly>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu UF" readonly id="uf">
         </div>
         <div id="retorno"></div>
    </div>
@@ -44,9 +44,17 @@
             xmlHttp.onreadystatechange = () => {
                 if(xmlHttp.readyState == 4) {
                     if(xmlHttp.status == 200) {
-                        console.log('aqui');
+                        let dadosJSONText = xmlHttp.responseText
+                        //console.log(dadosJSONText);
+                        let dadosJSONObj = JSON.parse(dadosJSONText)
+                        //console.log(dadosJSONObj);
+                        document.getElementById('endereco').value = dadosJSONObj.logradouro
+                        document.getElementById('bairro').value = dadosJSONObj.bairro
+                        document.getElementById('cidade').value = dadosJSONObj.localidade
+                        document.getElementById('uf').value = dadosJSONObj.uf
+                        document.getElementById('retorno').innerHTML = ''
                     }
-                    if(xmlHttp.status == 404) {
+                    if(xmlHttp.status == 0) {
                         document.getElementById('retorno').innerHTML = '<h1>Recursos não encontrados, Código de erro 404</h1>';
                     }
                 }

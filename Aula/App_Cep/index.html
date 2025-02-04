@@ -7,23 +7,52 @@
     <title>App Cep</title>
 </head>
 <body>
-    <nav class="navbar bg-light">
+    <nav class="navbar bg-secondary">
         <div class="container-fluid">
-            <h3>App Pesquisa Endereço</h3>
+            <h3 class="text-light">App Pesquisa Endereço</h3>
         </div>
     </nav>
    <div class="row m-5">
-    <div class="container-fluid">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control bg-light" placeholder="CEP" aria-label="CEP" aria-describ>
-            <input type="text" class="form-control bg-light" placeholder="Endereço" aria-label="Endereço" aria-describ>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label text-primary">CEP</label>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu CEP" onblur="getEndereco(this.value)">
         </div>
-        <div class="input-group mb-3" style="gap: 1rem;">
-            <input type="text" class="form-control bg-light" placeholder="Bairro" aria-label="Bairro" aria-describ>
-            <input type="text" class="form-control bg-light" placeholder="Cidade" aria-label="Cidade" aria-describ>
-            <input type="text" class="form-control bg-light" placeholder="UF" aria-label="UF" aria-describ>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label text-primary">Endereço</label>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu Endereço" readonly>
         </div>
-    </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label text-primary">Bairro</label>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu Bairro" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label text-primary">Cidade</label>
+            <input type="text" class="form-control bg-light" placeholder="Digite sua Cidade" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label text-primary">UF</label>
+            <input type="text" class="form-control bg-light" placeholder="Digite seu UF" readonly>
+        </div>
+        <div id="retorno"></div>
    </div>
+   <script>
+        function getEndereco(cep) {
+            //console.log(url)
+            let url = "http://viacep.com.br/ws/"+cep+"/json/"
+            let xmlHttp = new XMLHttpRequest
+            xmlHttp.open('GET', url)
+            xmlHttp.onreadystatechange = () => {
+                if(xmlHttp.readyState == 4) {
+                    if(xmlHttp.status == 200) {
+                        console.log('aqui');
+                    }
+                    if(xmlHttp.status == 404) {
+                        document.getElementById('retorno').innerHTML = '<h1>Recursos não encontrados, Código de erro 404</h1>';
+                    }
+                }
+            }
+            xmlHttp.send();
+        }
+   </script>
 </body>
 </html>

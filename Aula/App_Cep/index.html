@@ -37,7 +37,6 @@
    </div>
    <script>
         function getEndereco(cep) {
-            //console.log(url)
             let url = "http://viacep.com.br/ws/"+cep+"/json/"
             let xmlHttp = new XMLHttpRequest
             xmlHttp.open('GET', url)
@@ -45,9 +44,7 @@
                 if(xmlHttp.readyState == 4) {
                     if(xmlHttp.status == 200) {
                         let dadosJSONText = xmlHttp.responseText
-                        //console.log(dadosJSONText);
                         let dadosJSONObj = JSON.parse(dadosJSONText)
-                        //console.log(dadosJSONObj);
                         document.getElementById('endereco').value = dadosJSONObj.logradouro
                         document.getElementById('bairro').value = dadosJSONObj.bairro
                         document.getElementById('cidade').value = dadosJSONObj.localidade
